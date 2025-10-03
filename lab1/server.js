@@ -32,9 +32,6 @@ app.use(
     return {
       schema,
       graphiql: true,
-      context: {
-        test: x++,
-      },
     };
   })
 );
