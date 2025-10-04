@@ -7,7 +7,7 @@ import {
 } from "graphql";
 import { CompanyType, UserType } from "./types.js";
 import { Company, User } from "../database/models.js";
-import { mutations } from "./Mutations.js";
+import { mutations } from "./mutations.js";
 
 const Query = new GraphQLObjectType({
   name: "QueryType",
