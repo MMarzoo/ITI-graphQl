@@ -6,6 +6,7 @@ import {
   GraphQLString,
 } from "graphql";
 import { Company, User } from "../database/models.js";
+import { fieldsList } from "graphql-fields-list";
 
 export const CompanyType = new GraphQLObjectType({
   name: "Company",
@@ -15,8 +16,8 @@ export const CompanyType = new GraphQLObjectType({
     slogan: { type: GraphQLString },
     users: {
       type: new GraphQLList(UserType),
-      async resolve(parent) {
-        return await User.find({ companyId: parent._id });
+      async resolve(parent, args, context) {
+        return context.userByCompanyLoader.load(parent.id);
       },
     },
   }),
@@ -30,8 +31,12 @@ export const UserType = new GraphQLObjectType({
     age: { type: GraphQLInt },
     company: {
       type: CompanyType,
-      async resolve(parent) {
-        return await Company.findById(parent.companyId);
+      async resolve(parent, args, context, info) {
+        const selectionField = fieldsList(info).join(" ");
+        return context.companyLoader.load({
+          id: parent.companyId,
+          selectionField,
+        });
       },
     },
   }),

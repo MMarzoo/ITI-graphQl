@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./database/connection.js";
 import { graphqlHTTP } from "express-graphql";
 import schema from "./schema/schema.js";
+import { companyLoader, userByCompanyLoader } from "./loaders/loader.js";
 
 //^ Load environment variables
 dotenv.config();
@@ -32,6 +33,10 @@ app.use(
     return {
       schema,
       graphiql: true,
+      context: {
+        companyLoader,
+        userByCompanyLoader,
+      },
     };
   })
 );

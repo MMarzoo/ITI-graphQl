@@ -17,6 +17,7 @@
     "express": "^5.1.0",
     "express-graphql": "^0.12.0",
     "graphql": "^15.10.1",
+    "graphql-fields-list": "^2.3.0",
     "mongoose": "^8.15.1"
   },
   "devDependencies": {
