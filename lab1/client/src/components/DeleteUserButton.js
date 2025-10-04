@@ -14,11 +14,11 @@ export default function DeleteUserButton({ userId }) {
           refetchQueries: [{ query: GET_USERS }],
         })
         .then(() => {
-          alert("✅ User deleted successfully!");
+          alert("User deleted successfully!");
         })
         .catch((err) => {
           console.error("Error deleting user:", err);
-          alert("❌ Failed to delete user");
+          alert("Failed to delete user");
         });
     }
   };
